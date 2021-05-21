@@ -11,6 +11,7 @@
     Chain: 가로나 세로영역들이 하나의 그룹인것처럼 동작하는 것.
     layout_constraintHorizontal_chainStyle: Head에 주면 체인 스타일 적용 가능하다.
     슬라이더 영역(seek bar): 프로그레스바에 드레그가 가능
+    0dp: 상하좌우의 제약에 맞춰서길이가 정해진다
     -->
 
     <TextView
@@ -38,6 +39,12 @@
         app:layout_constraintTop_toTopOf="@+id/remainMinutesTextView"
         tools:ignore="HardcodedText" />
 
-
+    <SeekBar
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/remainMinutesTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
