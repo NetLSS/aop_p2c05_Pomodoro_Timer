@@ -46,17 +46,17 @@
 
     <SeekBar
 
-        android:thumb="@drawable/ic_thumb"
-        android:progressDrawable="@color/transparent"
         android:id="@+id/seekBar"
-        app:tickMark="@drawable/drawable_tick_mark"
-        android:layout_marginHorizontal="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:max="60"
+        android:progressDrawable="@color/transparent"
+        android:thumb="@drawable/ic_thumb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remainMinutesTextView" />
+        app:layout_constraintTop_toBottomOf="@id/remainMinutesTextView"
+        app:tickMark="@drawable/drawable_tick_mark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
