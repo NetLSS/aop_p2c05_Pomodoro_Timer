@@ -14,16 +14,18 @@
     슬라이더 영역(seek bar): 프로그레스바에 드레그가 가능
     0dp: 상하좌우의 제약에 맞춰서길이가 정해진다
     app:layout_constraintBaseline_toBaselineOf: 아래 선을 기준으로 제약을 주어 정렬시킴
+    contentDescription: 접근성
     -->
 
     <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_tomato_stem"
+        app:layout_constraintBottom_toTopOf="@id/remainMinutesTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/remainMinutesTextView"
-        android:src="@drawable/img_tomato_stem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/remainMinutesTextView"
