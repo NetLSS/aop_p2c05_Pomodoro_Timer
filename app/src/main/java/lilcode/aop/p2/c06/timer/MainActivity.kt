@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity() {
         soundPool.autoPause() // 모든 활성 스트림 정지
     }
 
-    private fun initSounds(){
+
+
+    private fun initSounds() {
         // sound 로드
         tickingSoundId = soundPool.load(this, R.raw.timer_ticking, 1)
         bellSoundId = soundPool.load(this, R.raw.timer_bell, 1)
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    if(fromUser){ // updateSeekBar 에서 변경되는 경우도 있기때문에 유저가 만질때만.
+                    if (fromUser) { // updateSeekBar 에서 변경되는 경우도 있기때문에 유저가 만질때만.
                         // 프로그레스바를 조정하고 있으면 초를 0으로 맞춰주기 위해 추가 (텍스트뷰 갱신)
                         updateRemainTimes(progress * 60 * 1000L)
                     }
@@ -81,22 +83,27 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     seekBar ?: return
-                    // 사용자가 바에서 손을 떼는 순간 새로운 타이머 생성
-                    currentCountDownTImer = createCountDownTimer(seekBar.progress * 60 * 1000L)
-                    currentCountDownTImer?.start()
 
-                    // 소리 재생 (null 아닌 경우 사운드 재생)
-                    // 디바이스 자체에 요청하는 거기 때문에 화면 종료시 계속 재생될 수 있음
-                    // 생명주기이 따라 처리 필요.
-                    tickingSoundId?.let { soundId ->
-                        soundPool.play(soundId, 1F, 1F, 0, -1, 1F)
-                    }
+                    startCountDown()
                 }
             }
         )
     }
-    
-    
+
+    private fun startCountDown() {
+        // 사용자가 바에서 손을 떼는 순간 새로운 타이머 생성
+        currentCountDownTImer = createCountDownTimer(seekBar.progress * 60 * 1000L)
+        currentCountDownTImer?.start()
+
+        // 소리 재생 (null 아닌 경우 사운드 재생)
+        // 디바이스 자체에 요청하는 거기 때문에 화면 종료시 계속 재생될 수 있음
+        // 생명주기이 따라 처리 필요.
+        tickingSoundId?.let { soundId ->
+            soundPool.play(soundId, 1F, 1F, 0, -1, 1F)
+        }
+    }
+
+
     // 타이머 생성 함수
     private fun createCountDownTimer(initialMillis: Long): CountDownTimer =
         object : CountDownTimer(initialMillis, 1000L) {
@@ -107,15 +114,19 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                updateRemainTimes(0)
-                updateSeekBar(0)
-
-                soundPool.autoPause()
-                bellSoundId?.let { soundId ->
-                    soundPool.play(soundId, 1F, 1F, 0, 0, 1F)
-                }
+                completeCountDown()
             }
         }
+
+    private fun completeCountDown() {
+        updateRemainTimes(0)
+        updateSeekBar(0)
+
+        soundPool.autoPause()
+        bellSoundId?.let { soundId ->
+            soundPool.play(soundId, 1F, 1F, 0, 0, 1F)
+        }
+    }
 
     // 초가 지날 때마다 텍스트뷰 갱신
     @SuppressLint("SetTextI18n")
@@ -126,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         remainSecondsTextView.text = "%02d".format(remainSeconds % 60)
     }
 
-    private fun updateSeekBar(remainMillis: Long){
+    private fun updateSeekBar(remainMillis: Long) {
         seekBar.progress = (remainMillis / 1000 / 60).toInt() // 분
     }
 }
