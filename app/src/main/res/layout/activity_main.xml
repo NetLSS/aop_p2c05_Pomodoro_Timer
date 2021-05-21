@@ -50,6 +50,7 @@
         android:progressDrawable="@color/transparent"
         android:id="@+id/seekBar"
         app:tickMark="@drawable/drawable_tick_mark"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="60"
