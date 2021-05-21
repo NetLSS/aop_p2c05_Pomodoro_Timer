@@ -37,6 +37,19 @@ class MainActivity : AppCompatActivity() {
         initSounds() // soundPool 사용
     }
 
+    override fun onResume() {
+        super.onResume()
+        // 앱이 다시 시작되는 경우
+        soundPool.autoResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 앱이 화면에 보이지 않을 경우
+        //soundPool.pause() // 특정 스트림 아이디로 정지
+        soundPool.autoPause() // 모든 활성 스트림 정지
+    }
+
     private fun initSounds(){
         // sound 로드
         tickingSoundId = soundPool.load(this, R.raw.timer_ticking, 1)
@@ -73,6 +86,8 @@ class MainActivity : AppCompatActivity() {
                     currentCountDownTImer?.start()
 
                     // 소리 재생 (null 아닌 경우 사운드 재생)
+                    // 디바이스 자체에 요청하는 거기 때문에 화면 종료시 계속 재생될 수 있음
+                    // 생명주기이 따라 처리 필요.
                     tickingSoundId?.let { soundId ->
                         soundPool.play(soundId, 1F, 1F, 0, -1, 1F)
                     }
