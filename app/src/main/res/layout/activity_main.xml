@@ -6,13 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
+    tools:ignore="HardcodedText" : 텍스트 warning 제거
+    Chain: 가로나 세로영역들이 하나의 그룹인것처럼 동작하는 것.
+    layout_constraintHorizontal_chainStyle: Head에 주면 체인 스타일 적용 가능하다.
+    슬라이더 영역(seek bar): 프로그레스바에 드레그가 가능
+    -->
+
     <TextView
+        android:id="@+id/remainMinutesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="00"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/remainSecondsTextView"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/remainSecondsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@id/remainMinutesTextView"
+        app:layout_constraintLeft_toRightOf="@id/remainMinutesTextView"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/remainMinutesTextView"
+        tools:ignore="HardcodedText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
