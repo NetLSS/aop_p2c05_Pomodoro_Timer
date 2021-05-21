@@ -1,6 +1,7 @@
 package lilcode.aop.p2.c06.timer
 
 import android.annotation.SuppressLint
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -21,13 +22,25 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.seekBar)
     }
 
+    private val soundPool = SoundPool.Builder().build() // soundPool 선언
+
     private var currentCountDownTImer: CountDownTimer? = null
+
+    private var tickingSoundId: Int? = null
+    private var bellSoundId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         bindViews()
+        initSounds() // soundPool 사용
+    }
+
+    private fun initSounds(){
+        // sound 로드
+        tickingSoundId = soundPool.load(this, R.raw.timer_ticking, 1)
+        bellSoundId = soundPool.load(this, R.raw.timer_bell, 1)
     }
 
     private fun bindViews() {
@@ -58,6 +71,11 @@ class MainActivity : AppCompatActivity() {
                     // 사용자가 바에서 손을 떼는 순간 새로운 타이머 생성
                     currentCountDownTImer = createCountDownTimer(seekBar.progress * 60 * 1000L)
                     currentCountDownTImer?.start()
+
+                    // 소리 재생 (null 아닌 경우 사운드 재생)
+                    tickingSoundId?.let { soundId ->
+                        soundPool.play(soundId, 1F, 1F, 0, -1, 1F)
+                    }
                 }
             }
         )
