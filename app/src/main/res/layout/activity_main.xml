@@ -45,6 +45,8 @@
         tools:ignore="HardcodedText" />
 
     <SeekBar
+        android:thumb="@drawable/ic_thumb"
+        android:progressDrawable="@color/transparent"
         android:id="@+id/seekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
