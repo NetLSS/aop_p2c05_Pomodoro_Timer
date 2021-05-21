@@ -16,6 +16,15 @@
     app:layout_constraintBaseline_toBaselineOf: 아래 선을 기준으로 제약을 주어 정렬시킴
     -->
 
+    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/remainMinutesTextView"
+        android:src="@drawable/img_tomato_stem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/remainMinutesTextView"
         android:layout_width="wrap_content"
