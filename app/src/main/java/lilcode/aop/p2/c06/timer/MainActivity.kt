@@ -80,14 +80,17 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {
                     // 조정하기 시작하면 기존 타이머가 있을 때 cancel 후 null
-                    currentCountDownTImer?.cancel()
-                    currentCountDownTImer = null
+                    stopCountDown()
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     seekBar ?: return
 
-                    startCountDown()
+                    if (seekBar.progress == 0) {
+                        stopCountDown()
+                    } else {
+                        startCountDown()
+                    }
                 }
             }
         )
@@ -104,6 +107,12 @@ class MainActivity : AppCompatActivity() {
         tickingSoundId?.let { soundId ->
             soundPool.play(soundId, 1F, 1F, 0, -1, 1F)
         }
+    }
+
+    private fun stopCountDown() {
+        currentCountDownTImer?.cancel()
+        currentCountDownTImer = null
+        soundPool.autoPause()
     }
 
 
