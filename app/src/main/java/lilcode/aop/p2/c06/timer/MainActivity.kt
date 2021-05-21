@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
         soundPool.autoPause() // 모든 활성 스트림 정지
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        soundPool.release() // 더이상 필요 없으면 사운드풀 메모리에서 해제
+    }
 
     private fun initSounds() {
         // sound 로드
