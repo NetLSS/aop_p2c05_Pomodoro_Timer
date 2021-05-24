@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.button25min)
     }
 
+    private val buttonStop: Button by lazy{
+        findViewById(R.id.buttonStop)
+    }
+
     private val soundPool = SoundPool.Builder().build() // soundPool 선언
 
     private var currentCountDownTImer: CountDownTimer? = null
@@ -114,6 +118,10 @@ class MainActivity : AppCompatActivity() {
 
             startCountDown()
         }
+
+        buttonStop.setOnClickListener {
+            stopCountDown()
+        }
     }
 
     private fun startCountDown() {
@@ -133,6 +141,8 @@ class MainActivity : AppCompatActivity() {
         currentCountDownTImer?.cancel()
         currentCountDownTImer = null
         soundPool.autoPause()
+        updateRemainTimes(0)
+        updateSeekBar(0)
     }
 
 
