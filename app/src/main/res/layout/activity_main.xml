@@ -70,4 +70,16 @@
         app:layout_constraintTop_toBottomOf="@id/remainMinutesTextView"
         app:tickMark="@drawable/drawable_tick_mark" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button25min"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:textAllCaps="false"
+        android:background="@drawable/round_button"
+        android:text="25min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

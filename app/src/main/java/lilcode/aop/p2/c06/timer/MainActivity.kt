@@ -5,6 +5,7 @@ import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.seekBar)
     }
 
+    private val button25min: Button by lazy{
+        findViewById(R.id.button25min)
+    }
+
     private val soundPool = SoundPool.Builder().build() // soundPool 선언
 
     private var currentCountDownTImer: CountDownTimer? = null
@@ -34,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bindViews()
+        setOnClickListener()
         initSounds() // soundPool 사용
     }
 
@@ -94,6 +100,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+
+    }
+
+    private fun setOnClickListener(){
+        button25min.setOnClickListener {
+            val minutes25 = 25*1000*60L // 현재 버튼 1개라 일단 이렇게 구현.
+
+            stopCountDown()
+
+            updateSeekBar(minutes25)
+            updateRemainTimes(minutes25)
+
+            startCountDown()
+        }
     }
 
     private fun startCountDown() {
